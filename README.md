@@ -4,3 +4,7 @@ I made a car dealer ship project for a car sales man. This project will include 
 
 UML for project:
 ![umlForProject](images/diagramSS.png)
+
+## Phase 1
+
+I started by working on the Dealership class and my vehicle class. In my Dealer ship class i added get all vehicles functionaly, add or remove vehicles from the inventory. I added test cases for get all vehicles and add a vehicle.

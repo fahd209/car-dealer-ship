@@ -1,4 +1,6 @@
-public class Symbols 
+package com.pluralsight.ui;
+
+public class Symbols
 {
     public static final String SPADES = "\u2660";
     public static final String CLUBS = "\u2663";
