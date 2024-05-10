@@ -8,13 +8,13 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class FileManager {
-    private static DealerShip dealerShip;
 
-    public void getDealership()
+    public static DealerShip getDealership()
     {
+        DealerShip dealerShip = null;
 
         //reading file
-        File inventoryFile = new File("files/inventory.csv");
+        File inventoryFile = new File("files//inventory.csv");
         try(
                 FileReader filereader = new FileReader(inventoryFile);
                 Scanner reader = new Scanner(filereader)
@@ -57,9 +57,10 @@ public class FileManager {
         {
             System.out.println("Something went wrong");
         }
+        return dealerShip;
     }
 
-    public void saveDealerShip()
+    public static void saveDealerShip(DealerShip dealerShip)
     {
         File inventoryFile = new File("files/inventory.csv");
 
