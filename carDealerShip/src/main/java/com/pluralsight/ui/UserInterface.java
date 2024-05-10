@@ -10,14 +10,14 @@ import java.util.Scanner;
 
 
 public class UserInterface {
-    String vin = "Vin";
-    String year = "Year";
-    String make = "Make";
-    String model = "Model";
-    String type = "type";
-    String color = "Color";
-    String odometer = "Odometer";
-    String price = "Price";
+    String vinTitle = "Vin";
+    String yearTitle = "Year";
+    String makeTitle = "Make";
+    String modelTitle = "Model";
+    String typeTitle = "type";
+    String colorTitle = "Color";
+    String odometerTitle = "Odometer";
+    String priceTitle = "Price";
     private static Scanner userInput = new Scanner(System.in);
     DealerShip dealerShip;
 
@@ -31,6 +31,7 @@ public class UserInterface {
         display();
     }
 
+    // displaying menu
     public void display()
     {
         System.out.println("----------------Year Ups dealer ship----------------");
@@ -59,10 +60,10 @@ public class UserInterface {
                         displayAllVehicles(dealerShip);
                         break;
                     case 2:
-                        System.out.println("Adding vehicle");
+                        addVehicle();
                         break;
                     case 3:
-                        System.out.println("Remove a vehicle");
+                        removeVehicle();
                         break;
                     case 4:
                         System.out.println("Finding vehicles with price range");
@@ -111,16 +112,73 @@ public class UserInterface {
         }
     }
 
-    private void displayAllVehicles(DealerShip dealerShip) {
-
+    private void displayAllVehicles(DealerShip dealerShip)
+    {
         System.out.println();
         System.out.println("-------------------------------------------All vehicles---------------------------------------------");
-        System.out.printf(" %-10s | %-10s | %-10s | %-10s | %-10s | %-10s | %-10s | %-10s \n", vin, year, make, model, type, color, odometer, price);
+        System.out.printf(" %-10s | %-10s | %-10s | %-10s | %-10s | %-10s | %-10s | %-10s \n", vinTitle, yearTitle, makeTitle, modelTitle, typeTitle, colorTitle, odometerTitle, priceTitle);
         System.out.println("-".repeat(100));
         for (Vehicle vehicle : dealerShip.getAllVehicles())
         {
             System.out.printf(" %-10d | %-10d | %-10s | %-10s | %-10s | %-10s | %-10d | %.2f \n", vehicle.getVin(), vehicle.getYear(), vehicle.getMake(), vehicle.getModel(), vehicle.getVehicleType(), vehicle.getColor(), vehicle.getOdometer(), vehicle.getPrice());
             System.out.println("-".repeat(100));
         }
+    }
+
+    public void addVehicle()
+    {
+        // getting new vehicles info
+        try {
+            System.out.println();
+            System.out.print("Enter vehicle information");
+
+            System.out.print("Enter the vin of the vehicle: ");
+            String vinInput = userInput.nextLine().strip().replace(" ", "");
+            int vin = Integer.parseInt(vinInput);
+
+            System.out.print("Enter the year of the vehicle: ");
+            String yearInput = userInput.nextLine().strip().replace(" ", "");
+            int year = Integer.parseInt(yearInput);
+
+            System.out.print("Enter vehicle make: ");
+            String make = userInput.nextLine().strip();
+
+            System.out.print("Enter vehicle model: ");
+            String model = userInput.nextLine().strip();
+
+            System.out.print("Enter vehicle type: ");
+            String vehicleType = userInput.nextLine().strip();
+
+            System.out.print("Enter vehicle color: ");
+            String color = userInput.nextLine();
+
+            System.out.print("Enter vehicle odometer: ");
+            String odometerInput = userInput.nextLine().strip();
+            int odometer = Integer.parseInt(odometerInput);
+
+            System.out.print("Enter vehicle price: ");
+            String priceInput = userInput.nextLine().strip();
+            double price = Double.parseDouble(priceInput);
+
+            // adding vehicle to dealership
+            Vehicle vehicle = new Vehicle(vin, year, make, model, vehicleType, color, odometer, price);
+            dealerShip.addVehicle(vehicle);
+        }
+        catch (InputMismatchException e)
+        {
+            userInput.nextLine();
+            System.out.println("Invalid input");
+        }
+        catch (Exception e)
+        {
+            userInput.nextLine();
+            System.out.println("Something went wrong try again");
+        }
+
+    }
+
+    public void removeVehicle()
+    {
+
     }
 }
