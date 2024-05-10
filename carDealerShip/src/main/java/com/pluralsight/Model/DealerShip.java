@@ -6,7 +6,7 @@ public class DealerShip {
     String name;
     String address;
     String phone;
-    ArrayList<Vehicle> inventory;
+    ArrayList<Vehicle> inventory = new ArrayList<>();
 
     public DealerShip(String name, String address, String phone)
     {
@@ -37,5 +37,21 @@ public class DealerShip {
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    public ArrayList<Vehicle> getAllVehicles()
+    {
+
+        return inventory;
+    }
+
+    public void addVehicle(Vehicle vehicle)
+    {
+        inventory.add(vehicle);
+    }
+
+    public void removeVehicle(Vehicle vehicle)
+    {
+        inventory.remove(vehicle);
     }
 }
