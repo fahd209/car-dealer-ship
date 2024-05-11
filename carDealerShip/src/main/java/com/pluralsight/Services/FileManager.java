@@ -32,6 +32,7 @@ public class FileManager {
 
             while(reader.hasNextLine())
             {
+                // reading the rest of the lines
                 String line = reader.nextLine();
                 String[] vehicleColumns = line.split("[|]");
 
@@ -44,8 +45,10 @@ public class FileManager {
                 int odometer = Integer.parseInt(vehicleColumns[6].strip());
                 double price = Double.parseDouble(vehicleColumns[7].strip());
 
+                // creating a vehicle object with the data from the csv file
                 Vehicle vehicle = new Vehicle(vin, year, make, model, vehicleType, color, odometer, price);
 
+                // adding vehicle to inventory
                 dealerShip.addVehicle(vehicle);
             }
         }
@@ -62,24 +65,28 @@ public class FileManager {
 
     public static void saveDealerShip(DealerShip dealerShip)
     {
+
         File inventoryFile = new File("files/inventory.csv");
 
+        // saving data to the csv file when the user leaves
         try(
                 FileWriter fileWriter = new FileWriter(inventoryFile);
                 PrintWriter writer = new PrintWriter(fileWriter)
                 )
         {
+            // getting the dealership name and writing it to the file
             String dealerShipName = dealerShip.getName();
             String dealerShipAddress = dealerShip.getAddress();
             String dealerShipPhone = dealerShip.getPhone();
 
-            writer.printf(" %s | %s | %s", dealerShipName, dealerShipAddress, dealerShipPhone);
+            writer.printf(" %s | %s | %s \n", dealerShipName, dealerShipAddress, dealerShipPhone);
 
             ArrayList<Vehicle> inventory = dealerShip.getAllVehicles();
 
+            // getting the vehicles in the inventory and writing it to the file
             for(Vehicle vehicle : inventory)
             {
-                writer.printf(" %d | %d | %s | %s | %s | %s | %d | %.2f", vehicle.getVin(), vehicle.getYear(), vehicle.getMake(), vehicle.getModel(), vehicle.getVehicleType(), vehicle.getColor(), vehicle.getOdometer(), vehicle.getPrice());
+                writer.printf(" %d | %d | %s | %s | %s | %s | %d | %.2f \n", vehicle.getVin(), vehicle.getYear(), vehicle.getMake(), vehicle.getModel(), vehicle.getVehicleType(), vehicle.getColor(), vehicle.getOdometer(), vehicle.getPrice());
             }
 
         }

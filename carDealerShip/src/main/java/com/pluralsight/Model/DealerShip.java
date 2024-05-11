@@ -48,13 +48,12 @@ public class DealerShip {
     public void addVehicle(Vehicle vehicle)
     {
         System.out.println();
-        System.out.println("Vehicle Removed");
+        System.out.println();
         inventory.add(vehicle);
     }
 
     public void removeVehicle(Vehicle vehicle)
     {
-        System.out.println("adding vehicle");
         inventory.remove(vehicle);
     }
 }
