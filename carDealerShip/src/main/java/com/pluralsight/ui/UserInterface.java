@@ -73,7 +73,7 @@ public class UserInterface {
                         findVehiclesByMakeAndModel(dealerShip);
                         break;
                     case 6:
-                        findByYearRand(dealerShip);
+                        findByYearRange(dealerShip);
                         break;
                     case 7:
                         findVehiclesByColor(dealerShip);
@@ -320,7 +320,7 @@ public class UserInterface {
         }
     }
 
-    public void findByYearRand(DealerShip dealerShip)
+    public void findByYearRange(DealerShip dealerShip)
     {
         try
         {
