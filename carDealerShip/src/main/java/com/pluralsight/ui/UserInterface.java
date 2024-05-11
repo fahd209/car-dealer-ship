@@ -4,6 +4,7 @@ import com.pluralsight.Model.DealerShip;
 import com.pluralsight.Model.Vehicle;
 import com.pluralsight.Services.FileManager;
 
+import java.util.ArrayList;
 import java.util.FormatFlagsConversionMismatchException;
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -19,20 +20,19 @@ public class UserInterface {
     String odometerTitle = "Odometer";
     String priceTitle = "Price";
     private static Scanner userInput = new Scanner(System.in);
-    DealerShip dealerShip;
 
     public UserInterface()
     {
-        dealerShip = FileManager.getDealership();
     }
 
     public void run()
     {
-        display();
+        DealerShip dealerShip = FileManager.getDealership();
+        display(dealerShip);
     }
 
     // displaying menu
-    public void display()
+    public void display(DealerShip dealerShip)
     {
         System.out.println("----------------Year Ups dealer ship----------------");
         String input = "";
@@ -60,10 +60,10 @@ public class UserInterface {
                         displayAllVehicles(dealerShip);
                         break;
                     case 2:
-                        addVehicle();
+                        addVehicle(dealerShip);
                         break;
                     case 3:
-                        removeVehicle();
+                        removeVehicle(dealerShip);
                         break;
                     case 4:
                         System.out.println("Finding vehicles with price range");
@@ -107,7 +107,8 @@ public class UserInterface {
             catch (Exception e)
             {
                 System.out.println();
-                System.out.println("Something went wrong, try again ");
+                e.printStackTrace();
+                System.out.println("Something went wrong, try again");
             }
         }
     }
@@ -125,12 +126,12 @@ public class UserInterface {
         }
     }
 
-    public void addVehicle()
+    public void addVehicle(DealerShip dealerShip)
     {
         // getting new vehicles info
         try {
             System.out.println();
-            System.out.print("Enter vehicle information");
+            System.out.println("Enter vehicle information");
 
             System.out.print("Enter the vin of the vehicle: ");
             String vinInput = userInput.nextLine().strip().replace(" ", "");
@@ -177,8 +178,40 @@ public class UserInterface {
 
     }
 
-    public void removeVehicle()
+    public void removeVehicle(DealerShip dealerShip)
     {
+        int vin = 0;
+        try {
+            System.out.println();
+            System.out.println("Enter the vin for the vehicle you want to remove");
+            System.out.print("Enter input: ");
+            vin = userInput.nextInt();
+            userInput.nextLine();
 
+        }
+        catch (FormatFlagsConversionMismatchException e)
+        {
+            System.out.println("Invalid input please enter only numbers");
+        }
+        catch (InputMismatchException e)
+        {
+            userInput.nextLine();
+            System.out.println("Invalid input");
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+            System.out.println("Something went wrong try again");
+        }
+
+        ArrayList<Vehicle> allVehicles = dealerShip.getAllVehicles();
+
+        for (Vehicle vehicle : allVehicles)
+        {
+            if(vehicle.getVin() == vin)
+            {
+                dealerShip.removeVehicle(vehicle);
+            }
+        }
     }
 }
