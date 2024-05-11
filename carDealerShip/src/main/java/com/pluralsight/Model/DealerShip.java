@@ -47,8 +47,6 @@ public class DealerShip {
 
     public void addVehicle(Vehicle vehicle)
     {
-        System.out.println();
-        System.out.println();
         inventory.add(vehicle);
     }
 

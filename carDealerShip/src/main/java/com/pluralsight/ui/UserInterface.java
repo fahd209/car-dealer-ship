@@ -42,16 +42,16 @@ public class UserInterface {
         {
             try{
                 System.out.println();
-                System.out.println("(1) - List All vehicles");
-                System.out.println("(2) - Add a vehicle");
-                System.out.println("(3) - Remove a vehicle");
-                System.out.println("(4) - Find vehicles within a price range");
-                System.out.println("(5) - Find vehicles by make / model");
-                System.out.println("(6) - Find vehicles by year range");
-                System.out.println("(7) - Find vehicles by color");
-                System.out.println("(8) - Find vehicles by mileage range");
-                System.out.println("(9) - Find vehicles by type (Sedan, truck, SUV, van)");
-                System.out.println("(0) - Save and quit");
+                System.out.println(ColorCodes.YELLOW + "(1)" + ColorCodes.RESET + ColorCodes.CYAN + " - List All vehicles" + ColorCodes.RESET);
+                System.out.println(ColorCodes.YELLOW + "(2)" + ColorCodes.RESET + ColorCodes.CYAN + " - Add a vehicle" + ColorCodes.RESET);
+                System.out.println(ColorCodes.YELLOW + "(3)" + ColorCodes.RESET + ColorCodes.CYAN + " - Remove a vehicle" + ColorCodes.RESET );
+                System.out.println(ColorCodes.YELLOW + "(4)" + ColorCodes.RESET + ColorCodes.CYAN + " - Find vehicles within a price range" + ColorCodes.RESET);
+                System.out.println(ColorCodes.YELLOW + "(5)" + ColorCodes.RESET + ColorCodes.CYAN + " - Find vehicles by make / model" + ColorCodes.RESET);
+                System.out.println(ColorCodes.YELLOW + "(6)" + ColorCodes.RESET + ColorCodes.CYAN + " - Find vehicles by year range" + ColorCodes.RESET);
+                System.out.println(ColorCodes.YELLOW + "(7)" + ColorCodes.RESET + ColorCodes.CYAN + " - Find vehicles by color" + ColorCodes.RESET);
+                System.out.println(ColorCodes.YELLOW + "(8)" + ColorCodes.RESET + ColorCodes.CYAN + " - Find vehicles by mileage range" + ColorCodes.RESET);
+                System.out.println(ColorCodes.YELLOW + "(9)" + ColorCodes.RESET + ColorCodes.CYAN + " - Find vehicles by type (Sedan, truck, SUV, van)" + ColorCodes.RESET);
+                System.out.println(ColorCodes.RED + "(0) - Save and quit" + ColorCodes.RESET);
                 System.out.print("Enter your input: ");
                 input = userInput.nextLine().strip().replace(" ", "");
                 choice = Integer.parseInt(input);
@@ -165,6 +165,7 @@ public class UserInterface {
             Vehicle vehicle = new Vehicle(vin, year, make, model, vehicleType, color, odometer, price);
             dealerShip.addVehicle(vehicle);
 
+            System.out.println();
             System.out.println(vehicle.getMake() + " " + vehicle.getModel() + " added to inventory");
         }
         catch (NumberFormatException e)
@@ -333,7 +334,7 @@ public class UserInterface {
             int endYear = userInput.nextInt();
             userInput.nextLine();
 
-            // filtering and checking if the is greater then or equal to start date and if the vehicle year is less then or equal to the end year
+            // filtering and checking if the is greater than or equal to start date and if the vehicle year is less then or equal to the end year
             ArrayList<Vehicle> vehiclesByYearRange = (ArrayList<Vehicle>) dealerShip.getAllVehicles().stream()
                             .filter(vehicle -> vehicle.getYear() >= startYear && vehicle.getYear() <= endYear)
                                     .collect(Collectors.toList());
@@ -347,6 +348,11 @@ public class UserInterface {
             {
                 System.out.printf(" %-10d | %-10d | %-10s | %-10s | %-10s | %-10s | %-10d | %.2f \n", vehicle.getVin(), vehicle.getYear(), vehicle.getMake(), vehicle.getModel(), vehicle.getVehicleType(), vehicle.getColor(), vehicle.getOdometer(), vehicle.getPrice());
                 System.out.println("-".repeat(100));
+            }
+
+            if(vehiclesByYearRange.isEmpty())
+            {
+                System.out.println("No vehicles found");
             }
 
         }
@@ -386,6 +392,11 @@ public class UserInterface {
                 System.out.printf(" %-10d | %-10d | %-10s | %-10s | %-10s | %-10s | %-10d | %.2f \n", vehicle.getVin(), vehicle.getYear(), vehicle.getMake(), vehicle.getModel(), vehicle.getVehicleType(), vehicle.getColor(), vehicle.getOdometer(), vehicle.getPrice());
                 System.out.println("-".repeat(100));
             }
+
+            if(vehiclesByColor.isEmpty())
+            {
+                System.out.println("No vehicles found");
+            }
         }
         catch (InputMismatchException e)
         {
@@ -401,7 +412,7 @@ public class UserInterface {
 
     public void findVehiclesByMileageRange(DealerShip dealerShip)
     {
-        // promopting user for input
+        // prompting user for input
         System.out.println();
         System.out.println("Enter starting miles range: ");
         int startingMileage = userInput.nextInt();
@@ -424,13 +435,18 @@ public class UserInterface {
             System.out.printf(" %-10d | %-10d | %-10s | %-10s | %-10s | %-10s | %-10d | %.2f \n", vehicle.getVin(), vehicle.getYear(), vehicle.getMake(), vehicle.getModel(), vehicle.getVehicleType(), vehicle.getColor(), vehicle.getOdometer(), vehicle.getPrice());
             System.out.println("-".repeat(100));
         }
+
+        if(vehiclesByMileRange.isEmpty())
+        {
+            System.out.println("No vehicles found");
+        }
     }
 
     public void findVehicleByType(DealerShip dealerShip)
     {
         try
         {
-            // promopting user for input
+            // prompting user for input
             System.out.println();
             System.out.println("Enter the vehicle type: ");
             String vehicleType = userInput.nextLine().strip();
@@ -448,6 +464,11 @@ public class UserInterface {
             {
                 System.out.printf(" %-10d | %-10d | %-10s | %-10s | %-10s | %-10s | %-10d | %.2f \n", vehicle.getVin(), vehicle.getYear(), vehicle.getMake(), vehicle.getModel(), vehicle.getVehicleType(), vehicle.getColor(), vehicle.getOdometer(), vehicle.getPrice());
                 System.out.println("-".repeat(100));
+            }
+
+            if(vehiclesByVehicleType.isEmpty())
+            {
+                System.out.println("No vehicles found");
             }
         }
         catch (InputMismatchException e)

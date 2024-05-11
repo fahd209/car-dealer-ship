@@ -213,6 +213,7 @@ public void findVehicleWithPriceRange(DealerShip dealerShip)
 ```
 
 Example of how to use the application:
+
 ![listAllVehicles](Images/listAllVehiclesSS.png)
 
 
