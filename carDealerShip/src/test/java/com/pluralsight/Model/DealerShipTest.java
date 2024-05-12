@@ -34,7 +34,7 @@ class DealerShipTest {
         dealerShip.addVehicle(vehicle);
 
         //assert
-        assertTrue(dealerShip.getAllVehicles().contains(vehicle));
+        assertTrue(dealerShip.getAllVehicles().contains(vehicle), "because add vehicle should add a vehicle to the dealership inventory");
     }
 
     @Test
@@ -48,7 +48,7 @@ class DealerShipTest {
         dealerShip.removeVehicle(vehicle);
 
         //assert
-        assertFalse(dealerShip.getAllVehicles().contains(vehicle));
+        assertFalse(dealerShip.getAllVehicles().contains(vehicle), "because remove vehicle should remove a vehicle from the dealerships inventory");
     }
 
     @Test
@@ -66,7 +66,7 @@ class DealerShipTest {
         //assert
         for (Vehicle vehicle : vehiclesByPriceRange)
         {
-            assertTrue(vehicle.getPrice() >= startingPrice && vehicle.getPrice() <= endingPrice);
+            assertTrue(vehicle.getPrice() >= startingPrice && vehicle.getPrice() <= endingPrice, "because findVehiclesByPriceRange() should return all vehicles within that price range");
         }
     }
 
@@ -84,12 +84,12 @@ class DealerShipTest {
         //assert
         for (Vehicle vehicle : vehiclesByMakeAndModel)
         {
-            assertTrue(vehicle.getMake().equalsIgnoreCase(make) && vehicle.getModel().equalsIgnoreCase(model));
+            assertTrue(vehicle.getMake().equalsIgnoreCase(make) && vehicle.getModel().equalsIgnoreCase(model), "because getVehicleByMakeAndMode should return all vehicles by make and model");
         }
     }
 
     @Test
-    public void getVehiclesFindVehiclesByYearRange_shouldReturn_allVehiclesWithInTheYearRange()
+    public void getVehiclesByYearRange_shouldReturn_allVehiclesWithInTheYearRange()
     {
         //arrange
         DealerShip dealerShip = FileManager.getDealership();
@@ -102,7 +102,7 @@ class DealerShipTest {
         //assert
         for(Vehicle vehicle : vehiclesByMakeAndModel)
         {
-            assertTrue(vehicle.getYear() >= startingYear && vehicle.getYear() <= endingYear);
+            assertTrue(vehicle.getYear() >= startingYear && vehicle.getYear() <= endingYear, "because getVehicles by year range should return all vehicles by year range");
         }
     }
 
@@ -119,7 +119,7 @@ class DealerShipTest {
         //assert
         for(Vehicle vehicle : vehiclesByColor)
         {
-            assertTrue(vehicle.getColor().equalsIgnoreCase(color));
+            assertTrue(vehicle.getColor().equalsIgnoreCase(color), "because getAllVehiclesByColor should return all the vehicles by the color provided");
         }
     }
 
@@ -136,7 +136,7 @@ class DealerShipTest {
         //assert
         for (Vehicle vehicle : vehiclesByType)
         {
-            assertTrue(vehicle.getVehicleType().equalsIgnoreCase(type));
+            assertTrue(vehicle.getVehicleType().equalsIgnoreCase(type), "because getVehiclesByType() should return all vehicles by the time provided");
         }
     }
 }
