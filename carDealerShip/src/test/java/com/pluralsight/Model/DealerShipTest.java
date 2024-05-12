@@ -1,7 +1,9 @@
 package com.pluralsight.Model;
 
+import com.pluralsight.Services.FileManager;
 import org.junit.jupiter.api.Test;
 
+import java.io.File;
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -47,5 +49,94 @@ class DealerShipTest {
 
         //assert
         assertFalse(dealerShip.getAllVehicles().contains(vehicle));
+    }
+
+    @Test
+    public void findVehicleByPrice_shouldReturn_allVehiclesWithInThatPriceRange()
+    {
+        //arrange
+        DealerShip dealerShip = FileManager.getDealership();
+        double startingPrice = 10000;
+        double endingPrice = 40000;
+
+
+        //act
+        ArrayList<Vehicle> vehiclesByPriceRange = dealerShip.getVehicleByPriceRange(startingPrice, endingPrice);
+
+        //assert
+        for (Vehicle vehicle : vehiclesByPriceRange)
+        {
+            assertTrue(vehicle.getPrice() >= startingPrice && vehicle.getPrice() <= endingPrice);
+        }
+    }
+
+    @Test
+    public void getVehiclesByMakeAndModel_shouldReturn_allTheVehiclesByMakeAndMode()
+    {
+        //arrange
+        DealerShip dealerShip = FileManager.getDealership();
+        String make = "Honda";
+        String model = "Accord";
+
+        //act
+        ArrayList<Vehicle> vehiclesByMakeAndModel = dealerShip.getVehiclesByMakeAndModel(make, model);
+
+        //assert
+        for (Vehicle vehicle : vehiclesByMakeAndModel)
+        {
+            assertTrue(vehicle.getMake().equalsIgnoreCase(make) && vehicle.getModel().equalsIgnoreCase(model));
+        }
+    }
+
+    @Test
+    public void getVehiclesFindVehiclesByYearRange_shouldReturn_allVehiclesWithInTheYearRange()
+    {
+        //arrange
+        DealerShip dealerShip = FileManager.getDealership();
+        int startingYear = 2015;
+        int endingYear = 2020;
+
+        //act
+        ArrayList<Vehicle> vehiclesByMakeAndModel = dealerShip.getVehiclesByYearRange(startingYear, endingYear);
+
+        //assert
+        for(Vehicle vehicle : vehiclesByMakeAndModel)
+        {
+            assertTrue(vehicle.getYear() >= startingYear && vehicle.getYear() <= endingYear);
+        }
+    }
+
+    @Test
+    public void getVehiclesByColor_shouldReturn_allVehicleWithProvidedColor()
+    {
+        //arrange
+        DealerShip dealerShip = FileManager.getDealership();
+        String color = "Red";
+
+        //act
+        ArrayList<Vehicle> vehiclesByColor = dealerShip.getVehiclesByColor(color);
+
+        //assert
+        for(Vehicle vehicle : vehiclesByColor)
+        {
+            assertTrue(vehicle.getColor().equalsIgnoreCase(color));
+        }
+    }
+
+    @Test
+    public void getVehiclesByType_shouldReturn_allVehiclesByTheTypeProvide()
+    {
+        //arrange
+        DealerShip dealerShip = FileManager.getDealership();
+        String type = "sedan";
+
+        //act
+        ArrayList<Vehicle> vehiclesByType = dealerShip.getVehiclesByType(type);
+
+        //assert
+        for (Vehicle vehicle : vehiclesByType)
+        {
+            assertTrue(vehicle.getVehicleType().equalsIgnoreCase(type));
+        }
     }
 }

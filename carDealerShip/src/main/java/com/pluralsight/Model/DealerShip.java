@@ -58,7 +58,6 @@ public class DealerShip {
 
     public ArrayList<Vehicle> getVehicleByPriceRange(double min, double max)
     {
-
         return (ArrayList<Vehicle>) getAllVehicles().stream()
                 .filter(vehicle -> vehicle.getPrice() >= min)
                 .filter(vehicle -> vehicle.getPrice() <= max)
@@ -67,7 +66,6 @@ public class DealerShip {
 
     public ArrayList<Vehicle> getVehiclesByMakeAndModel(String make, String model)
     {
-
         return (ArrayList<Vehicle>) getAllVehicles().stream()
                 .filter(vehicle -> vehicle.getMake().equalsIgnoreCase(make) && vehicle.getModel().equalsIgnoreCase(model))
                 .collect(Collectors.toList());
