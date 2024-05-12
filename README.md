@@ -212,6 +212,32 @@ public void findVehicleWithPriceRange(DealerShip dealerShip)
     }
 ```
 
+## Test Cases
+
+I added test cases for the dealerShip to check if all the search operations are working correctly.
+
+Sample code for test cases: 
+
+```java
+    @Test
+    public void getVehiclesFindVehiclesByYearRange_shouldReturn_allVehiclesWithInTheYearRange()
+    {
+        //arrange
+        DealerShip dealerShip = FileManager.getDealership();
+        int startingYear = 2015;
+        int endingYear = 2020;
+
+        //act
+        ArrayList<Vehicle> vehiclesByMakeAndModel = dealerShip.getVehiclesByYearRange(startingYear, endingYear);
+
+        //assert
+        for(Vehicle vehicle : vehiclesByMakeAndModel)
+        {
+            assertTrue(vehicle.getYear() >= startingYear && vehicle.getYear() <= endingYear);
+        }
+    }
+```
+
 Example of how to use the application:
 
 ![listAllVehicles](Images/listAllVehiclesSS.png)
