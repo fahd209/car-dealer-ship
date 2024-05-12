@@ -34,4 +34,18 @@ class DealerShipTest {
         //assert
         assertTrue(dealerShip.getAllVehicles().contains(vehicle));
     }
+
+    @Test
+    public void removeVehicle_ShouldRemove_VehicleFromTheInventory()
+    {
+        //arrange
+        DealerShip dealerShip = new DealerShip("D & B Used Cars", "\"111 Old Benbrook Rd, Dallas, TX 45137\"","817-555-5555");
+        Vehicle vehicle = new Vehicle(10112, 1993, "Ford", "Explorer", "SUV", "Red", 525123, 995);
+
+        //act
+        dealerShip.removeVehicle(vehicle);
+
+        //assert
+        assertFalse(dealerShip.getAllVehicles().contains(vehicle));
+    }
 }

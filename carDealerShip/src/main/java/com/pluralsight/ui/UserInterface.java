@@ -242,13 +242,10 @@ public class UserInterface {
             double maxPrice = userInput.nextDouble();
             userInput.nextLine();
 
-            // searching within price range
+            // searching in my dealership inventory and displaying it on the screen
+            ArrayList<Vehicle> priceRangeVehicles = dealerShip.getVehicleByPriceRange(minPrice, maxPrice);
 
-            ArrayList<Vehicle> priceRangeVehicles = (ArrayList<Vehicle>) dealerShip.getAllVehicles().stream()
-                    .filter(vehicle -> vehicle.getPrice() >= minPrice)
-                    .filter(vehicle -> vehicle.getPrice() <= maxPrice)
-                    .collect(Collectors.toList());
-
+            // displaying vehicles
             System.out.println();
             System.out.println("-----------------------------------------Vehicles by price range------------------------------------");
             System.out.printf(" %-10s | %-10s | %-10s | %-10s | %-10s | %-10s | %-10s | %-10s \n", vinTitle, yearTitle, makeTitle, modelTitle, typeTitle, colorTitle, odometerTitle, priceTitle);
@@ -289,11 +286,9 @@ public class UserInterface {
             String model = userInput.nextLine().strip();
 
             // filtering and adding the vehicle that match input make and model to the arrayList
-            ArrayList<Vehicle> vehiclesByMakeAndModel = (ArrayList<Vehicle>) dealerShip.getAllVehicles().stream()
-                    .filter(vehicle -> vehicle.getMake().equalsIgnoreCase(make) || vehicle.getModel().equalsIgnoreCase(model))
-                    .collect(Collectors.toList());
+            ArrayList<Vehicle> vehiclesByMakeAndModel = dealerShip.getVehiclesByMakeAndModel(make, model);
 
-            //looping through the array list and printing the vehicles
+            // displaying vehicles
             System.out.println("-----------------------------------------Vehicles by model name------------------------------------");
             System.out.printf(" %-10s | %-10s | %-10s | %-10s | %-10s | %-10s | %-10s | %-10s \n", vinTitle, yearTitle, makeTitle, modelTitle, typeTitle, colorTitle, odometerTitle, priceTitle);
             System.out.println("-".repeat(100));
@@ -334,10 +329,8 @@ public class UserInterface {
             int endYear = userInput.nextInt();
             userInput.nextLine();
 
-            // filtering and checking if the is greater than or equal to start date and if the vehicle year is less then or equal to the end year
-            ArrayList<Vehicle> vehiclesByYearRange = (ArrayList<Vehicle>) dealerShip.getAllVehicles().stream()
-                            .filter(vehicle -> vehicle.getYear() >= startYear && vehicle.getYear() <= endYear)
-                                    .collect(Collectors.toList());
+            // getting all the vehicles with in that year range
+            ArrayList<Vehicle> vehiclesByYearRange = dealerShip.getVehiclesByYearRange(startYear, endYear);
 
             //displaying the vehicles
             System.out.println();
@@ -378,9 +371,7 @@ public class UserInterface {
             String color = userInput.nextLine();
 
             // filtering and checking if the vehicles color is equal to the color provided
-            ArrayList<Vehicle> vehiclesByColor = (ArrayList<Vehicle>) dealerShip.getAllVehicles().stream()
-                            .filter(vehicle -> vehicle.getColor().equalsIgnoreCase(color))
-                            .collect(Collectors.toList());
+            ArrayList<Vehicle> vehiclesByColor = dealerShip.getVehiclesByColor(color);
 
             // displaying vehicles
             System.out.println();
@@ -414,7 +405,7 @@ public class UserInterface {
     {
         // prompting user for input
         System.out.println();
-        System.out.println("Enter starting miles range: ");
+        System.out.print("Enter starting miles range: ");
         int startingMileage = userInput.nextInt();
 
         System.out.print("Enter ending miles range: ");
@@ -422,9 +413,7 @@ public class UserInterface {
         userInput.nextLine();
 
         // filtering and checking if vehicles mileage is in between what the user provided
-        ArrayList<Vehicle> vehiclesByMileRange = (ArrayList<Vehicle>) dealerShip.getAllVehicles().stream()
-                .filter(vehicle -> vehicle.getOdometer() >= startingMileage && vehicle.getOdometer() <= endingMileage)
-                .collect(Collectors.toList());
+        ArrayList<Vehicle> vehiclesByMileRange = dealerShip.getVehicleByMileageRange(startingMileage, endingMileage);
 
         //displaying vehicles
         System.out.println("------------------------------------------Vehicles by mileage range-------------------------------------");
@@ -448,13 +437,11 @@ public class UserInterface {
         {
             // prompting user for input
             System.out.println();
-            System.out.println("Enter the vehicle type: ");
+            System.out.print("Enter the vehicle type: ");
             String vehicleType = userInput.nextLine().strip();
 
             // filtering and checking if the vehicle type is equal to what the user provided
-            ArrayList<Vehicle> vehiclesByVehicleType = (ArrayList<Vehicle>) dealerShip.getAllVehicles().stream()
-                    .filter(vehicle -> vehicle.getVehicleType().equalsIgnoreCase(vehicleType))
-                    .collect(Collectors.toList());
+            ArrayList<Vehicle> vehiclesByVehicleType = dealerShip.getVehiclesByType(vehicleType);
 
             // displaying vehicles to the screen
             System.out.println("------------------------------------------Vehicles by type---------------------------------------");
