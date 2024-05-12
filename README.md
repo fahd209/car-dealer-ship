@@ -216,7 +216,8 @@ public void findVehicleWithPriceRange(DealerShip dealerShip)
 
 I added test cases for the dealerShip to check if all the search operations are working correctly.
 
-Sample code for test cases: 
+I think this the unit test are pretty interesting because if you added code to your program and something fails you get to look at the error because of the unit tests you had.
+Sample test: 
 
 ```java
     @Test
